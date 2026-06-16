@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Variáveis de cor (paleta teal/mint) ── */
+:root {
+  --primary: #2aab8e;
+  --primary-dark: #1d8a6f;
+  --primary-light: #4fc4a8;
+  --bg: #d4f0ea;
+  --bg2: #c0e9e0;
+  --surface: rgba(255,255,255,0.70);
+  --surface-border: rgba(42,171,142,0.20);
+  --text: #1a3d35;
+  --text-muted: #4a7a6e;
+  --text-faint: #7ab0a5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  margin: 0;
+}
+
+#root { width: 100%; text-align: left; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 3px; }
+
+/* Fundo gradiente teal */
+.gradient-bg {
+  background: linear-gradient(160deg, #c8ede6 0%, #b0e2d8 40%, #caf0e8 100%);
+  min-height: 100vh;
+}
+
+/* Cards em branco leitoso com sombra suave */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(42,171,142,0.08);
+}
+
+/* Botão principal */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(42,171,142,0.35);
+}
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Cards de idioma */
+.lang-card {
+  background: rgba(255,255,255,0.55);
+  border: 2px solid transparent;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  color: var(--text);
+}
+.lang-card:hover { border-color: var(--primary); background: rgba(42,171,142,0.10); }
+.lang-card.selected { border-color: var(--primary); background: rgba(42,171,142,0.18); }
+
+/* Barra de progresso */
+.progress-bar {
+  height: 8px;
+  background: rgba(42,171,142,0.15);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+/* Navbar */
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 500;
+  border: none;
+  background: none;
+}
+.nav-item.active { color: var(--primary-dark); font-weight: 700; }
+.nav-item:hover { color: var(--primary); }
+
+/* Toggle switch */
+.toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(42,171,142,0.20);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  flex-shrink: 0;
+}
+.toggle.on { background: var(--primary); }
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+.toggle.on::after { transform: translateX(20px); }
+
+/* Botões de opção de voz */
+.voice-btn {
+  padding: 8px 14px;
+  border-radius: 0.5rem;
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(42,171,142,0.20);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.voice-btn.selected {
+  background: rgba(42,171,142,0.18);
+  border-color: var(--primary);
+  color: var(--primary-dark);
+  font-weight: 600;
+}
+
+/* Animações */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 1s linear infinite; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.3s ease; }
+
+.step-done   { color: #1d8a6f; }
+.step-active { color: var(--primary); }
+.step-pending { color: var(--text-faint); }
