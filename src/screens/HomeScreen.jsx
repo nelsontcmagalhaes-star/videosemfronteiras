@@ -54,7 +54,17 @@ export default function HomeScreen({ user, onStart }) {
   }
 
   const handleStart = () => {
-    onStart({ fileName: file?.name || url, srcLang: LANGS.find(l=>l.code===srcLang)?.name||srcLang, dstLang, voiceType, voiceOpt, settings })
+    onStart({
+      file,
+      url: inputMode === 'url' ? url : null,
+      fileName: file?.name || url,
+      srcLangCode: srcLang,
+      srcLang: LANGS.find(l => l.code === srcLang)?.name || srcLang,
+      dstLang,
+      voiceType,
+      voiceOpt,
+      settings,
+    })
   }
 
   const isPremium = user.plan === 'admin' || user.plan === 'premium'

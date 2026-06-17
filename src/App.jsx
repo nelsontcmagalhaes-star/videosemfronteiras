@@ -3,6 +3,7 @@ import './index.css'
 import { supabase } from './lib/supabase'
 import { fetchTranslations, insertTranslation, deleteTranslation, upsertProfile } from './lib/db'
 import NavBar from './components/NavBar'
+import Footer from './components/Footer'
 import HomeScreen from './screens/HomeScreen'
 import ProgressScreen from './screens/ProgressScreen'
 import LibraryScreen from './screens/LibraryScreen'
@@ -77,27 +78,29 @@ export default function App() {
   }
 
   const handleJobDone = async (job) => {
+    const localItem = {
+      id: Date.now(),
+      name: job.fileName || 'Vídeo traduzido',
+      date: new Date().toLocaleDateString('pt-BR'),
+      srcLang: job.srcLang,
+      dstLang: job.dstLang,
+      duration: '--:--',
+      size: '---',
+      status: 'done',
+      downloadUrl: job.downloadUrl || null,
+    }
     try {
       const row = await insertTranslation(user.id, job)
       setLibrary(prev => [{
+        ...localItem,
         id: row.id,
-        name: row.name,
         date: new Date(row.created_at).toLocaleDateString('pt-BR'),
-        srcLang: row.src_lang,
-        dstLang: row.dst_lang,
         duration: row.duration,
         size: row.size,
         status: row.status,
       }, ...prev])
     } catch {
-      // fallback local se tabela não existir
-      setLibrary(prev => [{
-        id: Date.now(),
-        name: job.fileName || 'Vídeo traduzido',
-        date: new Date().toLocaleDateString('pt-BR'),
-        srcLang: job.srcLang, dstLang: job.dstLang,
-        duration: '--:--', size: '---', status: 'done',
-      }, ...prev])
+      setLibrary(prev => [localItem, ...prev])
     }
     setCurrentJob(null)
     setTab('library')
@@ -142,6 +145,7 @@ export default function App() {
         {tab === 'admin' && isAdmin && <AdminScreen library={library}/>}
       </div>
       <NavBar tab={tab} setTab={setTab} isAdmin={isAdmin} user={user} onLogout={handleLogout}/>
+      <Footer/>
     </div>
   )
 }

@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
+
+# Environment — API keys (never commit)
+.env
+.env.local
+.env*.local
