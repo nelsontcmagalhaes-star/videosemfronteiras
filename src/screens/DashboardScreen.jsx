@@ -56,19 +56,22 @@ export default function DashboardScreen({ library, user }) {
         ))}
       </div>
 
-      {/* Premium plan */}
+      {/* Tech stack info */}
       <div className="card p-4 mb-5" style={{ borderColor:C.primary }}>
-        <p className="text-xs font-semibold mb-3" style={{ color:C.primary }}>PLANO PREMIUM — R$ 29,90/mês</p>
+        <p className="text-xs font-semibold mb-3" style={{ color:C.primary }}>CAPACIDADES DO APP</p>
         <ul className="space-y-2">
-          {['Traduções ilimitadas','Vídeos até 2 horas','Vozes premium ElevenLabs','Exportação Full HD','Sem marca d\'água'].map(f=>(
+          {[
+            'Arquivos de vídeo até 25 MB (limite Whisper)',
+            'Transcrição com OpenAI Whisper',
+            'Tradução com GPT-4o-mini',
+            'Dublagem com ElevenLabs (8 vozes)',
+            'Download em MP4 (mesmo codec do original)',
+          ].map(f=>(
             <li key={f} className="flex items-center gap-2 text-sm" style={{ color:C.muted }}>
               <span style={{ color:C.dark }}>✓</span> {f}
             </li>
           ))}
         </ul>
-        {user.plan==='free' && (
-          <button className="btn-primary w-full mt-4 py-2.5 text-sm">Assinar Premium</button>
-        )}
       </div>
 
       {/* Recents */}

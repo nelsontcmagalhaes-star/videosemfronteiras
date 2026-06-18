@@ -246,18 +246,25 @@ export default function LoginScreen({ onLogin }) {
         )}
       </div>
 
-      {/* Plans */}
-      <div className="w-full max-w-sm mt-6 grid grid-cols-2 gap-3">
-        <div className="card p-4 text-center">
-          <div className="text-xs font-semibold mb-1" style={{ color:C.faint }}>GRATUITO</div>
-          <div className="text-xl font-bold" style={{ color:C.text }}>R$ 0</div>
-          <div className="text-xs mt-2" style={{ color:C.muted }}>3 vídeos/mês • 5 min</div>
+      {/* Tech stack */}
+      <div className="w-full max-w-sm mt-6 card p-4">
+        <p className="text-xs font-semibold mb-3 text-center" style={{ color:C.faint }}>TECNOLOGIA UTILIZADA</p>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          {[
+            { icon:'🎙️', label:'Whisper', desc:'Transcrição' },
+            { icon:'🌐', label:'GPT-4',   desc:'Tradução'    },
+            { icon:'🔊', label:'ElevenLabs', desc:'Dublagem' },
+          ].map(({ icon, label, desc }) => (
+            <div key={label}>
+              <div className="text-xl mb-1">{icon}</div>
+              <div className="text-xs font-semibold" style={{ color:C.dark }}>{label}</div>
+              <div className="text-xs" style={{ color:C.faint }}>{desc}</div>
+            </div>
+          ))}
         </div>
-        <div className="card p-4 text-center" style={{ borderColor:C.primary }}>
-          <div className="text-xs font-semibold mb-1" style={{ color:C.primary }}>PREMIUM</div>
-          <div className="text-xl font-bold" style={{ color:C.text }}>R$ 29,90</div>
-          <div className="text-xs mt-2" style={{ color:C.muted }}>Ilimitado • 2h • HD</div>
-        </div>
+        <p className="text-xs text-center mt-3" style={{ color:C.faint }}>
+          Arquivos MP4 · MOV · AVI · MKV até 25 MB
+        </p>
       </div>
 
       <Footer/>
